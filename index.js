@@ -40,6 +40,7 @@ function initialState(command){
         )
     }
 
+    
 
     this.state = {
         "travle": true,
@@ -62,7 +63,12 @@ function initialState(command){
        items:()=> {stats.state.inTown ? 
             staticAssets.items.map((item)=> 
             item.tier === stats.state.currentLocation.shopTier ? console.log(item.name) : "")
-            :notAllowed}
+            :notAllowed},
+        exit:()=> {
+            stats.state.inTown = false 
+            stats.state.travle = true
+            stats.travle.x++
+        }
    }
     
     
@@ -82,7 +88,7 @@ app.get("/", (req,res)=>{
     // localhost:3000/travle/add
 
     stats[req.params.command][req.params.value]()
-    //stats.show()
+    stats.show()
     stats.checkLocation()    
 
         
