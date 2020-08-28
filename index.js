@@ -24,7 +24,7 @@ const staticAssets = {
 function initLocation(location){
 
     console.log(`Welcome to ${location.name}`)
-    stats.state.travle = false
+    stats.state.travel = false
     stats.state.inTown = true
     stats.state.currentLocation = location
 }
@@ -36,27 +36,27 @@ function initialState(command){
 
     this.checkLocation=()=> {
         staticAssets.locations.map(
-            (location)=> {stats.travle.x === location.x ? initLocation(location) : ""}
+            (location)=> {stats.travel.x === location.x ? initLocation(location) : ""}
         )
     }
 
     
 
     this.state = {
-        "travle": true,
+        "travel": true,
         "inTown": false,
         "currentLocation" : {}
     }
 
     
 
-    this.travle = {
+    this.travel = {
         "x": 999,
         "y": 999,
-        west :()=> {stats.state.travle  ? stats.travle.x++ : notAllowed},
-        east :()=> {stats.state.travle  ? stats.travle.x-- : notAllowed},
-        north :()=> {stats.state.travle ? stats.travle.y-- : notAllowed},
-        south :()=> {stats.state.travle ? stats.travle.y++ : notAllowed}
+        west :()=> {stats.state.travel  ? stats.travel.x++ : notAllowed},
+        east :()=> {stats.state.travel  ? stats.travel.x-- : notAllowed},
+        north :()=> {stats.state.travel ? stats.travel.y-- : notAllowed},
+        south :()=> {stats.state.travel ? stats.travel.y++ : notAllowed}
     } ,
 
    this.shop = {
@@ -66,8 +66,8 @@ function initialState(command){
             :notAllowed},
         exit:()=> {
             stats.state.inTown = false 
-            stats.state.travle = true
-            stats.travle.x++
+            stats.state.travel = true
+            stats.travel.x++
         }
    }
     
@@ -85,7 +85,8 @@ app.get("/", (req,res)=>{
 
     app.get("/:command/:value", (req,res)=> {
     
-    // localhost:3000/travle/add
+    // curl localhost:3000/travel/west
+    // curl localhost:3000/shop/items
 
     stats[req.params.command][req.params.value]()
     stats.show()
