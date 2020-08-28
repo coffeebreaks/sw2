@@ -80,7 +80,7 @@ const stats = new initialState
 
 
 app.get("/", (req,res)=>{
-    res.send("(e)Explore")
+    res.send("")
 })
 
     app.get("/:command/:value", (req,res)=> {
